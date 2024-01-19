@@ -1,7 +1,11 @@
 #include <iostream>
 #include <cmath>
+#include <concepts>
 
 template<typename T>
+concept is_numeric = std::is_integral<T>::value || std::is_floating_point<T>::value;
+
+template<is_numeric T>
 class Complex {
 
 private:
@@ -66,7 +70,7 @@ public:
     }
 
     bool CompareToComplex(const Complex<T> &b) const {
-        if (this->p_re == b.p_re && this->p_im == b.p_im) {
+        if (std::abs(this->p_re - b.p_re) < epsilon && std::abs(this->p_im - b.p_im) < epsilon) {
             return true;
         } else {
             return false;
@@ -74,7 +78,7 @@ public:
     }
 
     bool CompareToIntFloat(T b) const {
-        if (this->p_re == b && this->p_im < epsilon) {
+        if (std::abs(this->p_re - b < epsilon) && this->p_im < epsilon) {
             return true;
         } else {
             return false;

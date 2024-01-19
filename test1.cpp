@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "main.cpp" // Замените на имя вашего заголовочного файла
+#include "ComplexNumbers.h"
 
 TEST(ComplexTests, DefaultConstructor) {
     Complex<int> c;
@@ -19,6 +19,14 @@ TEST(ComplexTests, Addition) {
     Complex<float> result = a + b;
     EXPECT_FLOAT_EQ(result.GetP_Re(), 3.0);
     EXPECT_FLOAT_EQ(result.GetP_Im(), 5.0);
+}
+
+TEST(ComplexTests, Minus) {
+    Complex<float> a(2.0, 3.0);
+    Complex<float> b(1.0, 2.0);
+    Complex<float> result = a - b;
+    EXPECT_FLOAT_EQ(result.GetP_Re(), 1.0);
+    EXPECT_FLOAT_EQ(result.GetP_Im(), 1.0);
 }
 
 TEST(ComplexTests, Multiplication) {
@@ -58,10 +66,13 @@ TEST(ComplexTests, ComparisonToIntFloat) {
 TEST(ComplexTests, Division) {
     Complex<double> a(1.0, 2.0);
     Complex<double> b(2.0, 3.0);
+    Complex<double> c(0.0, 0.0);
     Complex<double> result = a / b;
     EXPECT_NEAR(result.GetP_Re(), 0.615384615, 1e-6);
     EXPECT_NEAR(result.GetP_Im(), 0.076923076, 1e-6);
+    EXPECT_THROW(a / c, std::runtime_error);
 }
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.25)
 project(Complex)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 # Ваш исполняемый файл (приложение)
-add_executable(Complex main.cpp test1.cpp)
+add_executable(Complex test1.cpp ComplexNumbers.h)
 
 # Добавляем папку с исходными файлами Google Test
 add_subdirectory(googletest-main)
